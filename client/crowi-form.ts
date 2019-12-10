@@ -3,8 +3,8 @@ $(function() {
   const crowiRenderer = window.crowiRenderer
   const inlineAttachment = window.inlineAttachment
 
-  var pageId = $('#content-main').data('page-id')
-  var pagePath = $('#content-main').data('path')
+  const pageId = $('#content-main').data('page-id')
+  const pagePath = $('#content-main').data('path')
 
   // show/hide
   function FetchPagesUpdatePostAndInsert(path) {
@@ -196,7 +196,7 @@ $(function() {
     if (event.shiftKey === true) {
       if (currentLine && currentLine.text.charAt(0) === '|') {
         // prev cell in table
-        var newPos = text.lastIndexOf('|', pos.start - 1)
+        const newPos = text.lastIndexOf('|', pos.start - 1)
         if (newPos > 0) {
           $target.selection('setPos', { start: newPos - 1, end: newPos - 1 })
         }
@@ -212,7 +212,7 @@ $(function() {
     } else {
       if (currentLine && currentLine.text.charAt(0) === '|') {
         // next cell in table
-        var newPos = text.indexOf('|', pos.start + 1)
+        const newPos = text.indexOf('|', pos.start + 1)
         if (newPos < 0 || newPos === text.lastIndexOf('|', currentLine.end - 1)) {
           $target.selection('setPos', { start: currentLine.end, end: currentLine.end })
         } else {
@@ -268,7 +268,7 @@ $(function() {
         }
       }
       // $target.selection('insert', {text: "\n" + listMark, mode: 'before'});
-      var pos = $target.selection('getPos')
+      const pos = $target.selection('getPos')
       insertText(pos.start, pos.start, '\n' + listMark, 'replace')
       const newPosition = pos.start + ('\n' + listMark).length
       $target.selection('setPos', { start: newPosition, end: newPosition })
@@ -293,7 +293,7 @@ $(function() {
       const prevLine = getPrevLine(event)
       if (!prevLine || (!currentLine.text.match(/---/) && !prevLine.text.match(/\|/g))) {
         // $target.selection('insert', {text: "\n" + row.join(' --- ') + "\n" + row.join('  '), mode: 'before'});
-        var pos = $target.selection('getPos')
+        const pos = $target.selection('getPos')
         insertText(pos.start, pos.start, '\n' + row.join(' --- ') + '\n' + row.join('  '), 'after')
         $target.selection('setPos', {
           start: currentLine.caret + 6 * row.length - 1,
@@ -301,7 +301,7 @@ $(function() {
         })
       } else {
         // $target.selection('insert', {text: "\n" + row.join('  '), mode: 'before'});
-        var pos = $target.selection('getPos')
+        const pos = $target.selection('getPos')
         insertText(pos.start, pos.end, '\n' + row.join('  '), 'after')
         $target.selection('setPos', { start: currentLine.caret + 3, end: currentLine.caret + 3 })
       }
@@ -416,7 +416,7 @@ $(function() {
       },
     })
   }
-  var createEditorInstance = function($form) {
+  const createEditorInstance = function($form) {
     const $this = $form
 
     return {
@@ -435,8 +435,8 @@ $(function() {
   const $inputForm = $('form.uploadable textarea#form-body')
   if ($inputForm.length > 0) {
     const csrfToken = $('form.uploadable input#edit-form-csrf').val()
-    var pageId = $('#content-main').data('page-id') || 0
-    var pagePath = $('#content-main').data('path')
+    const pageId = $('#content-main').data('page-id') || 0
+    const pagePath = $('#content-main').data('path')
     const attachmentOption: any = {
       uploadUrl: '/_api/attachments.add',
       extraParams: {
